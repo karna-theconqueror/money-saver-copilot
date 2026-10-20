@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MoneySaver Copilot — Find free government benefits you're eligible for</title>
+<meta name="description" content="Answer a few quick questions and discover Indian government benefits, subsidies and savings schemes you may be leaving on the table. Free, private, 60 seconds." />
+<meta name="theme-color" content="#0E7A55" />
+<link rel="canonical" href="https://projectforge-operation.github.io/money-saver-copilot/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="MoneySaver Copilot — Find free money you're eligible for" />
+<meta property="og:description" content="A 60-second check against 24 real Indian government schemes. Free, private, no sign-up." />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"MoneySaver Copilot",
+"applicationCategory":"FinanceApplication","operatingSystem":"Any",
+"description":"Find Indian government benefits you are eligible for in 60 seconds.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+</script>
+<!-- Optional privacy-light analytics: uncomment and add your Plausible domain
+<script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+-->
+<style>
+  :root{
+    --bg:#FBFAF7; --ink:#14261E; --muted:#5C6B63; --card:#FFFFFF;
+    --line:#E6E2D8; --green:#0E7A55; --green-dk:#0A5C40; --gold:#E8A33D;
+    --soft:#F1F5F2; --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:16px 20px 80px}
+  header{display:flex; justify-content:space-between; align-items:center; padding:8px 0 4px}
+  .logo{font-weight:800; font-size:1.05rem; letter-spacing:-.02em; color:var(--green)}
+  .logo span{color:var(--gold)}
+  .nav{display:flex; gap:8px; align-items:center}
+  .lang-btn{
+    border:1.5px solid var(--line); background:#fff; border-radius:99px; padding:6px 12px;
+    font-size:.82rem; cursor:pointer; font-family:inherit; font-weight:600; color:var(--ink);
+  }
+  .lang-btn:hover{border-color:var(--green)}
+  .about-link{background:none;border:none;color:var(--muted);font-size:.82rem;cursor:pointer;font-family:inherit;text-decoration:underline}
+  .hero{text-align:center; padding:20px 0 4px}
+  h1{font-size:1.85rem; line-height:1.2; letter-spacing:-.03em; margin:6px 0 10px}
+  .sub{color:var(--muted); font-size:1rem; max-width:540px; margin:0 auto}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; margin-top:16px; box-shadow:0 1px 2px rgba(20,38,30,.04);
+  }
+  .q-num{font-size:.8rem; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:.08em}
+  .q-title{font-size:1.2rem; font-weight:700; margin:6px 0 14px; letter-spacing:-.02em}
+  .bar{height:6px; background:var(--soft); border-radius:99px; overflow:hidden; margin-bottom:16px}
+  .bar>i{display:block; height:100%; background:var(--green); border-radius:99px; transition:width .3s ease; width:0%}
+  .opts{display:grid; gap:10px}
+  .opts.two{grid-template-columns:1fr 1fr}
+  @media(max-width:480px){.opts.two{grid-template-columns:1fr}}
+  .opt{
+    border:1.5px solid var(--line); background:#fff; border-radius:12px; padding:13px 16px;
+    font-size:.98rem; text-align:left; cursor:pointer; transition:all .12s ease; color:var(--ink);
+    font-family:inherit;
+  }
+  .opt:hover{border-color:var(--green); background:var(--soft)}
+  .opt.sel{border-color:var(--green); background:#E8F5EF; font-weight:600}
+  .opt small{display:block; color:var(--muted); font-weight:400; font-size:.83rem; margin-top:2px}
+  .multi-note{font-size:.85rem; color:var(--muted); margin-bottom:4px; grid-column:1/-1}
+  .pin-input{
+    width:100%; border:1.5px solid var(--line); border-radius:12px; padding:13px 16px;
+    font-size:1rem; font-family:inherit; margin-bottom:12px; letter-spacing:.08em;
+  }
+  .pin-input:focus{outline:none; border-color:var(--green)}
+  .pin-ok{font-size:.85rem; color:var(--green); font-weight:600; margin:-6px 0 12px}
+  .btn{
+    display:inline-block; background:var(--green); color:#fff; border:none; border-radius:12px;
+    padding:12px 24px; font-size:.98rem; font-weight:600; cursor:pointer; font-family:inherit;
+    transition:background .12s ease; text-decoration:none;
+  }
+  .btn:hover{background:var(--green-dk)}
+  .btn.ghost{background:#fff; color:var(--green); border:1.5px solid var(--green)}
+  .btn.ghost:hover{background:var(--soft)}
+  .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+  .back{background:none; border:none; color:var(--muted); cursor:pointer; font-family:inherit; font-size:.9rem; margin-top:14px}
+  .back:hover{text-decoration:underline}
+  .total-card{
+    background:linear-gradient(135deg,#0E7A55,#0A5C40); color:#fff; border:none;
+    text-align:center; padding:30px 24px;
+  }
+  .total-card .lbl{font-size:.82rem; text-transform:uppercase; letter-spacing:.1em; opacity:.85}
+  .total-num{font-size:2.5rem; font-weight:800; letter-spacing:-.03em; margin:6px 0}
+  .total-card .note{font-size:.88rem; opacity:.85}
+  .result{
+    border:1px solid var(--line); border-radius:14px; padding:18px; margin-top:14px; background:#fff;
+  }
+  .result.claimed{opacity:.62; background:var(--soft)}
+  .result .head{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap}
+  .result h3{font-size:1.03rem; letter-spacing:-.01em}
+  .result .agency{font-size:.78rem; color:var(--muted); margin-top:2px}
+  .pill{
+    font-size:.76rem; font-weight:700; padding:5px 10px; border-radius:99px; white-space:nowrap;
+    background:#E8F5EF; color:var(--green-dk);
+  }
+  .pill.cover{background:#FFF3DF; color:#8A5A0B}
+  .pill.loan{background:#EAF0FB; color:#27478A}
+  .pill.training{background:#F3EAFB; color:#5B2782}
+  .why{font-size:.9rem; color:var(--muted); margin:10px 0}
+  .meta-row{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:8px}
+  .verified{font-size:.72rem; color:#8A8577; background:#F5F2EA; padding:3px 8px; border-radius:99px}
+  .claim{display:flex; gap:8px; align-items:center; font-size:.82rem; color:var(--muted); margin-top:10px; cursor:pointer; user-select:none}
+  .claim input{accent-color:var(--green); width:16px; height:16px; cursor:pointer}
+  details{margin-top:10px}
+  summary{
+    cursor:pointer; font-size:.88rem; font-weight:600; color:var(--green); list-style:none;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ ";}
+  details[open] summary::before{content:"▾ ";}
+  details ol{margin:10px 0 4px 20px; font-size:.9rem; color:var(--ink)}
+  details li{margin-bottom:6px}
+  .official{
+    display:inline-block; margin-top:10px; font-size:.83rem; color:var(--green); font-weight:600;
+    text-decoration:none;
+  }
+  .official:hover{text-decoration:underline}
+  .draft-box{
+    background:var(--soft); border:1px dashed var(--line); border-radius:12px; padding:16px;
+    font-size:.88rem; white-space:pre-wrap; margin-top:12px; max-height:320px; overflow:auto;
+  }
+  .fields{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px}
+  @media(max-width:480px){.fields{grid-template-columns:1fr}}
+  .fields input{
+    border:1.5px solid var(--line); border-radius:10px; padding:11px 14px; font-size:.92rem; font-family:inherit;
+  }
+  .fields input:focus{outline:none; border-color:var(--green)}
+  .fields input.wide{grid-column:1/-1}
+  .disclaim{font-size:.75rem; color:var(--muted); margin-top:24px; text-align:center; line-height:1.5}
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px);
+    background:var(--ink); color:#fff; padding:12px 20px; border-radius:10px; font-size:.88rem;
+    opacity:0; transition:all .25s ease; pointer-events:none; z-index:20; max-width:90vw; text-align:center;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+  footer{text-align:center; margin-top:36px; font-size:.8rem; color:var(--muted)}
+  footer a{color:var(--green)}
+  .hidden{display:none}
+  /* modal */
+  .modal-bg{position:fixed; inset:0; background:rgba(20,38,30,.45); display:flex; align-items:center; justify-content:center; z-index:30; padding:20px}
+  .modal{
+    background:#fff; border-radius:16px; max-width:560px; width:100%; max-height:85vh; overflow:auto;
+    padding:26px; position:relative;
+  }
+  .modal h2{font-size:1.25rem; letter-spacing:-.02em; margin-bottom:10px}
+  .modal p{font-size:.9rem; color:var(--muted); margin-bottom:12px}
+  .stats{background:var(--soft); border-radius:10px; padding:14px; font-size:.85rem; display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px}
+  /* how + examples */
+  .how li{margin:8px 0 8px 18px; font-size:.93rem}
+  .ex{font-size:.9rem; color:var(--ink); margin:8px 0; padding:12px 14px; background:var(--soft); border-radius:10px}
+  .ex-note{font-size:.75rem; color:var(--muted); margin-top:8px}
+  .section-t{font-size:1.05rem; font-weight:700; letter-spacing:-.01em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">MoneySaver<span>Copilot</span></div>
+    <div class="nav">
+      <button class="lang-btn" id="langbtn" onclick="toggleLang()">हिन्दी</button>
+      <button class="about-link" id="aboutbtn" onclick="openAbout()"></button>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="hero">
+      <h1 id="hero-title"></h1>
+      <p class="sub" id="hero-sub"></p>
+      <div class="actions" style="justify-content:center">
+        <button class="btn" id="startbtn" onclick="startQuiz()"></button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-t" id="how-t"></div>
+      <ol class="how" id="how-list"></ol>
+    </div>
+    <div class="card">
+      <div class="section-t" id="ex-t"></div>
+      <div class="ex" id="ex1"></div>
+      <div class="ex" id="ex2"></div>
+      <div class="ex" id="ex3"></div>
+      <div class="ex-note" id="ex-note"></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="card">
+      <div class="bar"><i id="progress"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-title" id="qtitle"></div>
+      <input class="pin-input hidden" id="pin" maxlength="6" inputmode="numeric" />
+      <div class="pin-ok hidden" id="pinok"></div>
+      <div class="opts" id="qopts"></div>
+      <div class="actions" id="qactions"></div>
+      <button class="back" id="qback" onclick="goBack()"></button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="hidden">
+    <div class="card total-card">
+      <div class="lbl" id="tot-lbl"></div>
+      <div class="total-num" id="total">₹0</div>
+      <div class="note" id="totalnote"></div>
+    </div>
+    <div id="resultlist"></div>
+
+    <div class="card">
+      <h3 style="font-size:1.02rem" id="details-t"></h3>
+      <div class="fields">
+        <input id="f_name" placeholder="" />
+        <input id="f_father" placeholder="" />
+        <input id="f_addr" class="wide" placeholder="" />
+        <input id="f_mob" placeholder="" inputmode="numeric" />
+      </div>
+      <h3 style="font-size:1.02rem; margin-top:18px" id="draft-t"></h3>
+      <p class="why" id="draft-sub"></p>
+      <div class="draft-box" id="draft"></div>
+      <div class="actions">
+        <button class="btn" id="copybtn" onclick="copyDraft()"></button>
+        <button class="btn ghost" id="wabtn" onclick="shareWhatsApp()"></button>
+        <button class="btn ghost" id="cardbtn" onclick="shareResult()"></button>
+        <button class="btn ghost" id="restartbtn" onclick="restart()"></button>
+      </div>
+    </div>
+
+    <p class="disclaim" id="disclaimer"></p>
+  </section>
+
+  <footer>
+    <div id="footer-note"></div>
+    <a href="https://www.myscheme.gov.in" target="_blank" rel="noopener">myScheme.gov.in</a>
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- ABOUT MODAL -->
+<div class="modal-bg hidden" id="aboutmodal">
+  <div class="modal">
+    <h2 id="about-t"></h2>
+    <div class="stats" id="statsbox"></div>
+    <p id="about-b"></p>
+    <button class="btn" onclick="closeAbout()" id="about-close"></button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="langs.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
