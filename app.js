@@ -11,6 +11,8 @@ function track(ev){
   evs.push({e:ev, t:Date.now()});
   if(evs.length>500) evs.splice(0, evs.length-500);
   LS.set('events', evs);
+  // forward to real analytics (GA4 / Plausible) if configured in config.js
+  if (typeof window.mscTrack === 'function') window.mscTrack(ev);
 }
 
 /* ---------------- language ---------------- */
