@@ -432,14 +432,25 @@ function shareResult(){
 /* ---------------- about / stats ---------------- */
 function openAbout(){
   renderStats();
-  document.getElementById('aboutmodal').classList.remove('hidden');
+  const m = document.getElementById('aboutmodal');
+  m.classList.remove('hidden');
+  m.style.display = 'flex';   // inline style beats any cached stylesheet
 }
-function closeAbout(){ document.getElementById('aboutmodal').classList.add('hidden'); }
+function closeAbout(){
+  const m = document.getElementById('aboutmodal');
+  m.classList.add('hidden');
+  m.style.display = 'none';   // inline style beats any cached stylesheet
+}
 document.addEventListener('click', e=>{
   if(e.target.id==='aboutmodal') closeAbout();
 });
 document.addEventListener('keydown', e=>{
   if(e.key==='Escape') closeAbout();
+});
+// belt-and-suspenders: bind close button directly too
+document.addEventListener('DOMContentLoaded', ()=>{
+  const cb = document.getElementById('about-close');
+  if(cb) cb.addEventListener('click', closeAbout);
 });
 
 function renderStats(){
