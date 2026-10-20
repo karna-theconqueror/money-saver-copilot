@@ -438,6 +438,9 @@ function closeAbout(){ document.getElementById('aboutmodal').classList.add('hidd
 document.addEventListener('click', e=>{
   if(e.target.id==='aboutmodal') closeAbout();
 });
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') closeAbout();
+});
 
 function renderStats(){
   const evs = LS.get('events',[]);
