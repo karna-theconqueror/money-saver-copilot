@@ -1,5 +1,5 @@
 // MoneySaver Copilot — Service Worker (offline-first app shell)
-const CACHE = 'msc-v2';
+const CACHE = 'msc-v3';
 const ASSETS = [
   './',
   './index.html',
