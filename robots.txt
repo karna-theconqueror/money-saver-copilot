@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /sw.js
+
+Sitemap: https://karna-theconqueror.github.io/money-saver-copilot/sitemap.xml

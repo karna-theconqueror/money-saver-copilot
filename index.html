@@ -6,11 +6,20 @@
 <title>MoneySaver Copilot — Find free government benefits you're eligible for</title>
 <meta name="description" content="Answer a few quick questions and discover Indian government benefits, subsidies and savings schemes you may be leaving on the table. Free, private, 60 seconds." />
 <meta name="theme-color" content="#0E7A55" />
-<link rel="canonical" href="https://projectforge-operation.github.io/money-saver-copilot/" />
+<link rel="canonical" href="https://karna-theconqueror.github.io/money-saver-copilot/" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="MoneySaver Copilot — Find free money you're eligible for" />
 <meta property="og:description" content="A 60-second check against 24 real Indian government schemes. Free, private, no sign-up." />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0E7A55" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<!-- Google Search Console verification: paste your token after creating a property for this site -->
+<meta name="google-site-verification" content="" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"MoneySaver Copilot",
 "applicationCategory":"FinanceApplication","operatingSystem":"Any",
@@ -256,6 +265,17 @@
 
 <script src="data.js"></script>
 <script src="langs.js"></script>
+<script src="config.js"></script>
+<script src="analytics.js"></script>
 <script src="app.js"></script>
+<script>
+  // Register service worker for offline / install-to-home-screen support
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .catch(() => { /* offline mode unavailable — app still works */ });
+    });
+  }
+</script>
 </body>
 </html>

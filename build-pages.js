@@ -25,7 +25,7 @@ for (const m of SCHEMES) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>${esc(enTitle)}</title>
 <meta name="description" content="${esc(enDesc)}"/>
-<link rel="canonical" href="https://projectforge-operation.github.io/money-saver-copilot/schemes/${m.id}.html"/>
+<link rel="canonical" href="https://karna-theconqueror.github.io/money-saver-copilot/schemes/${m.id}.html"/>
 <meta property="og:title" content="${esc(enTitle)}"/>
 <meta property="og:description" content="${esc(enDesc)}"/>
 <meta property="og:type" content="article"/>
@@ -64,4 +64,24 @@ ${m.hi ? `<div class="hi" lang="hi"><b>हिन्दी में:</b> ${esc(m
   fs.writeFileSync(path.join(outDir, m.id + '.html'), html, 'utf8');
   console.log('generated schemes/' + m.id + '.html');
 }
+
+// ---- sitemap.xml ----
+const BASE = 'https://karna-theconqueror.github.io/money-saver-copilot/';
+const today = new Date().toISOString().slice(0, 10);
+const urls = [
+  { loc: BASE, priority: '1.0', freq: 'weekly' },
+  ...SCHEMES.map(m => ({ loc: BASE + 'schemes/' + m.id + '.html', priority: '0.8', freq: 'monthly' }))
+];
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${u.freq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>
+`;
+fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap, 'utf8');
+console.log('generated sitemap.xml (' + urls.length + ' urls)');
 console.log('done — ' + SCHEMES.length + ' pages');
